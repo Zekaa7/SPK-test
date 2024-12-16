@@ -32,7 +32,7 @@ function ProveraVozaca({ href }: { href: string }) {
     const timeout = setTimeout(() => {
       setDebounceTimeout(null);
 
-      console.log("JMBG je validan:", value);
+      // console.log("JMBG je validan:", value);
     }, 1000);
 
     setIsValid(true);
@@ -76,6 +76,7 @@ function ProveraVozaca({ href }: { href: string }) {
   const handleCloseModal = () => setShowModal(false);
 
   const getDataFromModal = (data: ModalProps) => {
+    console.log("modal data", data);
     setJmbg(data.jmbg);
     setIsValid(true);
   };

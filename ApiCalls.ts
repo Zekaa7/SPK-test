@@ -138,7 +138,7 @@ export const createNewVozac = async (data: ModalProps) => {
     const result = await response.json();
     return result;
   } catch (error) {
-    console.error("Error during fetch:", error);
+    console.error("Error during fetch: CreateUser", error);
     throw error;
   }
 };

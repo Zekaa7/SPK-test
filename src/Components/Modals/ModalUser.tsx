@@ -42,9 +42,10 @@ function ModalDialog({
       jmbg: formData.get("jmbg") as string,
       brPasosa: formData.get("brPasosa") as string,
       stranac: data.stranac,
-      prevId: data.prevId,
-      drzavljanstvo: data.drzavljanstvo,
-      legitimacija: data.legitimacija,
+      // prevId: data.prevId,
+      drzavljanstvo: data.drzavljanstvo || null,
+      legitimacija: data.legitimacija || null,
+      // id: undefined,
     };
 
     // Provera JMBG samo ako osoba nije strani državljanin
@@ -57,16 +58,24 @@ function ModalDialog({
         setValidated(true);
       }
     }
-
     setData(newData);
 
     try {
-      await createNewVozac(newData);
+      const response = await createNewVozac(newData);
+      console.log(response);
+      if (response.isSucccess) {
+        const savedData = {
+          ...newData,
+          id: response.value.id,
+          prevId: response.value.prevId,
+        };
+      }
+      getData(newData);
       console.log("Data successfully sent to the server.");
     } catch (error) {
+      console.log(data);
       console.error("Failed to send data:", error);
     }
-    getData(newData);
 
     handleClose();
   };
